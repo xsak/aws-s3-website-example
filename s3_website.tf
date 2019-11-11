@@ -62,7 +62,7 @@ resource "aws_route53_record" "route53_for_s3_bucket" {
   depends_on = [ aws_s3_bucket.s3_website_bucket ]
 
   alias {
-      name    = local.fqdn
+      name    = aws_s3_bucket.s3_website_bucket.website_endpoint
       zone_id = aws_s3_bucket.s3_website_bucket.hosted_zone_id
       evaluate_target_health = true
   }

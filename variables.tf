@@ -1,6 +1,6 @@
 variable "region" {
   default     = "eu-north-1"
-  description = "The AWS reegion to use for the Short URL project."
+  description = "The AWS region to use for the Short URL project."
 }
 
 variable "s3_website_domain" {

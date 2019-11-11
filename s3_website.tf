@@ -1,5 +1,5 @@
 locals {
-  fqdn = "${var.short_url_subdomain}.${var.short_url_domain}"
+  fqdn = "${var.s3_website_subdomain}.${var.s3_website_domain}"
 }
 
 resource "aws_s3_bucket" "s3_website_bucket" {
@@ -52,5 +52,3 @@ resource "aws_s3_bucket_object" "thekey_html" {
   content_type = "text/html; charset=utf-8"
   etag         = "${md5(data.template_file.thekey_html.rendered)}"
 }
-
-

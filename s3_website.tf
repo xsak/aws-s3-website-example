@@ -56,8 +56,14 @@ data "aws_route53_zone" "default" {
 }
 
 resource "aws_route53_record" "default" {
-  zone_id = data.aws_route53_zone.default.zone_id
-  name    = local.fqdn
-  type    = "A"
-  ttl     = "600"
+  zone_id    = data.aws_route53_zone.default.zone_id
+  name       = local.fqdn
+  type       = "A"
+  depends_on = aws_s3_bucket.s3_website_bucket
+
+  alias {
+      name    = local.fqdn
+      zone_id = data.aws_route53_zone.id
+      evaluate_target_health = true
+  }
 }

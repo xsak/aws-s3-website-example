@@ -50,3 +50,13 @@ resource "aws_s3_bucket_object" "redirect_url" {
   }
 
 }
+
+data "aws_route53_zone" "default" {
+  name = var.s3_website_domain
+}
+
+resource "aws_route53_record" "default" {
+  zone_id = data.aws_route53_zone.default.zone_id
+  name    = local.fqdn
+  type    = "A"
+}

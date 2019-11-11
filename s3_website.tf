@@ -64,6 +64,6 @@ resource "aws_route53_record" "route53_for_s3_bucket" {
   alias {
       name    = aws_s3_bucket.s3_website_bucket.bucket_domain_name
       zone_id = aws_s3_bucket.s3_website_bucket.hosted_zone_id
-      evaluate_target_health = true
+      evaluate_target_health = false
   }
 }

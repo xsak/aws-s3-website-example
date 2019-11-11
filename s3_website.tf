@@ -28,6 +28,7 @@ resource "aws_s3_bucket_object" "index_html" {
   depends_on   = [aws_s3_bucket.s3_website_bucket]
   acl          = "public-read"
   content_type = "text/html; charset=utf-8"
+  website_redirect = "http://xsak.hu/nevnap"
   etag         = "${filemd5("index.html")}"
 
   tags = {

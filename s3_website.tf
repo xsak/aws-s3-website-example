@@ -51,19 +51,19 @@ resource "aws_s3_bucket_object" "redirect_url" {
 
 }
 
-data "aws_route53_zone" "default" {
+data "aws_route53_zone" "zone_fors3_bucket" {
   name = var.s3_website_domain
 }
 
-resource "aws_route53_record" "default" {
-  zone_id    = data.aws_route53_zone.default.zone_id
+resource "aws_route53_record" "route53_for_s3_bucket" {
+  zone_id    = data.aws_route53_zone.zone_fors3_bucket.zone_id
   name       = local.fqdn
   type       = "A"
   depends_on = [ aws_s3_bucket.s3_website_bucket ]
 
   alias {
       name    = local.fqdn
-      zone_id = data.aws_route53_zone.id
+      zone_id = aws_s3_bucket.s3_website_bucket.hosted_zone_id
       evaluate_target_health = true
   }
 }
